@@ -2632,6 +2632,11 @@ borderRadius:
              */
             select({ label, value, options, id }) {
                 let optionsHtml = '';
+                let hasMatch = options.some(opt => !opt.group && !opt.disabled && opt.value === value);
+                // If current value is not in the predefined list, add it as the first option
+                if (!hasMatch && value && value.trim()) {
+                    optionsHtml += `<option value="${this.escapeHtml(value)}" selected>${this.escapeHtml(value)}</option>`;
+                }
                 let inGroup = false;
                 for (let i = 0; i < options.length; i++) {
                     const opt = options[i];
