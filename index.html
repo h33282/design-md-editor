@@ -3940,6 +3940,13 @@ borderRadius:
                 item.addEventListener('click', () => {
                     const section = item.getAttribute('data-section');
                     if (section) {
+                        // Visually update active state immediately
+                        document.querySelectorAll('.sidebar-menu-item[data-section]').forEach(el => {
+                            el.classList.remove('active');
+                            el.removeAttribute('aria-current');
+                        });
+                        item.classList.add('active');
+                        item.setAttribute('aria-current', 'true');
                         State.setUI({ activeSection: section });
                     }
                 });
